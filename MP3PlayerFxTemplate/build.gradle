@@ -1,0 +1,47 @@
+// Gradle-Plugins fuer dieses Projekt auswaehlen
+plugins {
+    // Java-Applikation bauen
+    id 'application'
+    // Plugin fuer JavaFX-Projekte
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+
+    // Unit-Test-Bibliotheken
+    id 'jvm-test-suite'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    // Paketpfad und Namen Ihrer "main"-Klasse, bitte ggf. anpassen
+    mainClass = "de.hsrm.mi.enia.mp3player.StarterApp"
+}
+
+// Verwendung des FX-Plugins: FX-Version und Module wuenschen
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+// Test-Konfiguration (./gradlew test)
+testing {
+    suites { 
+        test { 
+            useJUnitJupiter() 
+        }
+    }
+}
+
+// Zusaetzlich benoetigte Abhaengigkeiten
+dependencies {
+	implementation fileTree('libs') { include '*.jar' }
+}
+
+// Abhaengigkeiten herunterladen von...
+repositories {
+    mavenCentral()
+}
+

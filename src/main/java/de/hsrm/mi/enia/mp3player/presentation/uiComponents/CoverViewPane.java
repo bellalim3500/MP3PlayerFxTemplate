@@ -25,15 +25,12 @@ public class CoverViewPane extends StackPane{
         coverView.setFitHeight(200);
         coverView.setImage(DEFAULT_IMAGE);
 
-        // addToPlaylist = new Button("Add");
-        // addToPlaylist.setId("addToPlaylistButton");
-
-
-
 
        
         this.getChildren().addAll(coverView);
-        //this.setAlignment(addToPlaylist, Pos.TOP_RIGHT);
+       
+
+
 
     }
 

@@ -2,8 +2,6 @@ package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import de.hsrm.mi.enia.mp3player.business.Track;
 import javafx.scene.control.ListCell;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 public class SongTile extends ListCell<Track> {

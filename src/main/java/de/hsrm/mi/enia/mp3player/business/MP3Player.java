@@ -84,7 +84,7 @@ public class MP3Player {
             audioPlayer.pause();
         }
     }
-
+ 
     public void playPlaylist() {
         if (shuffle) {
             Collections.shuffle(aktPlaylist.getList());

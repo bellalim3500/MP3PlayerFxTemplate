@@ -27,7 +27,7 @@ public class NavToolbarController extends BaseController<NavToolbar> {
 
         setActiveView(playerView);
        
-        root.getHomeButton().setOnAction(e -> setActiveView(homeView));
+       
         root.getPlayerButton().setOnAction(e-> setActiveView(playerView));
         root.getPlaylistButton().setOnAction(e -> setActiveView(playlistView));
 
@@ -35,7 +35,7 @@ public class NavToolbarController extends BaseController<NavToolbar> {
     }
 
     private void setActiveView(Pane active){
-        homeView.setVisible(false);
+        
         playerView.setVisible(false);
         playlistView.setVisible(false);
 

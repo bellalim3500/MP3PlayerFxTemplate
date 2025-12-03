@@ -6,22 +6,20 @@ import javafx.scene.layout.HBox;
 
 public class NavToolbar extends ToolBar {
 
-    private Button home;
+   
     private Button player;
     private Button playlist;
 
     public NavToolbar(){
-        home =new Button("Home");
+        
         player= new Button ("Player");
         playlist = new Button("Playlist");
 
-        this.getItems().addAll(home,player,playlist);
+        this.getItems().addAll(player,playlist);
 
     }
 
-    public Button getHomeButton() {
-        return home;
-    }
+  
 
     public Button getPlayerButton() {
         return player;

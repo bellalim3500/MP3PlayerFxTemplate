@@ -25,6 +25,8 @@ public class CoverViewPane extends StackPane{
         coverView.setFitHeight(200);
         coverView.setImage(DEFAULT_IMAGE);
 
+       
+
 
        
         this.getChildren().addAll(coverView);

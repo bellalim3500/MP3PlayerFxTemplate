@@ -21,7 +21,7 @@ public class PlayerView extends BorderPane {
 		controlPane = new ControlPane();
 		songInfo=new TextPane();
 		
-		this.setCenter(cover);
+		this.setTop(cover);
 		this.setCenter(songInfo);
 		this.setBottom(controlPane);
 	}

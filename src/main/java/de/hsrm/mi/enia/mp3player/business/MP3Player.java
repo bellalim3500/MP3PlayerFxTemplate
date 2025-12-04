@@ -21,17 +21,17 @@ public class MP3Player {
         minim = new SimpleMinim(true);
     }
 
-    public void play(String fileName) {
-        // 1. Debugging: Was genau versuchen wir zu laden?
-        System.out.println("--> play() aufgerufen mit: " + fileName);
+    public void play
+    (String fileName) {
+
         File f = new File(fileName);
-        System.out.println("--> Absoluter Pfad: " + f.getAbsolutePath());
-        System.out.println("--> Existiert Datei? " + f.exists());
 
         if (audioPlayer != null) {
             try {
                 audioPlayer.pause();
-            } catch (Exception e) { /* Ignorieren */ }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             audioPlayer = null;
         }
 
@@ -39,9 +39,9 @@ public class MP3Player {
             try {
                 audioPlayer = minim.loadMP3File(fileName);
                 audioPlayer.play();
-                System.out.println("--> Abspielen gestartet.");
+
             } catch (Exception e) {
-                System.err.println("--> CRASH beim Abspielen!");
+
                 e.printStackTrace();
             }
         }
@@ -49,29 +49,29 @@ public class MP3Player {
 
     // public void play(String fileName) {
 
-    //     if (audioPlayer != null) {
-    //         audioPlayer.pause();
-    //         audioPlayer.skip(audioPlayer.length());
-    //         audioPlayer = null;
-    //     }
-    //     if (audioPlayer == null) {
-    //         audioPlayer = minim.loadMP3File(fileName);
-    //         audioPlayer.play();
-    //     }
+    // if (audioPlayer != null) {
+    // audioPlayer.pause();
+    // audioPlayer.skip(audioPlayer.length());
+    // audioPlayer = null;
+    // }
+    // if (audioPlayer == null) {
+    // audioPlayer = minim.loadMP3File(fileName);
+    // audioPlayer.play();
+    // }
     // }
 
-    public void play(Track track){
+    public void play(Track track) {
 
-        if(aktPlaylist==null|| track==null){
-        System.err.print(" Invalid trackIndex.");
+        if (aktPlaylist == null || track == null) {
+            System.err.print(" Invalid trackIndex.");
             return;
-            }
+        }
 
-            currentTrack =aktPlaylist.getList().indexOf(track);
+        currentTrack = aktPlaylist.getList().indexOf(track);
 
-            if (currentTrack != -1){
-                playTrack(currentTrack);
-            }
+        if (currentTrack != -1) {
+            playTrack(currentTrack);
+        }
 
     }
 
@@ -177,7 +177,7 @@ public class MP3Player {
         return currentTrackPorperty.get();
     }
 
-    private void setCurrentTrack(Track track){
+    private void setCurrentTrack(Track track) {
         this.currentTrackPorperty.set(track);
     }
 

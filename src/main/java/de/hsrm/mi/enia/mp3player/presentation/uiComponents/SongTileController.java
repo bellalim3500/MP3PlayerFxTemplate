@@ -12,6 +12,8 @@ public class SongTileController extends BaseController<SongTile> {
 
     public SongTileController(SongTile tile) {
         this.root = tile;
+
+        
     }
 
     public void setPlayer(MP3Player player) {

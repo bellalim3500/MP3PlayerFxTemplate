@@ -85,7 +85,7 @@ public class MP3Player {
         Track track = aktPlaylist.getTrack(trackIndex);
         setCurrentTrack(track);
 
-        play("music" + track.getSoundFile());
+        play(track.getSoundFile());
 
     }
 

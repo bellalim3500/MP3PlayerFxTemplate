@@ -75,13 +75,13 @@ public class MP3PlayerGUI extends Application {
 
 		NavToolbar navToolbar = new NavToolbar();
 
-		StackPane contentPane = new StackPane(homeView, playlistView, playerView);
+		StackPane contentPane = new StackPane( playlistView, playerView);
 
-		playlistView.setVisible(false);
-		playerView.setVisible(true);
-		homeView.setVisible(false);
+		playlistView.setVisible(true);
+		playerView.setVisible(false);
 
-		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, homeView, playerView,
+
+		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView,
 				playlistView);
 		navToolbarController.initalize();
 

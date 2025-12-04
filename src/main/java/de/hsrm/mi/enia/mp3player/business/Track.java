@@ -6,13 +6,16 @@ import javafx.scene.image.Image;
 
 public class Track {
 
-    long id;
-    String title;
-    long length;
-    String albumTitle;
-    String interpret;
-    String soundFile;
-    byte[]albumImage;
+    private long id;
+    private String title;
+    private long length;
+    private String albumTitle;
+    private String interpret;
+    private String soundFile;
+    private byte[]albumImage;
+    private Image coverImage;
+
+   
 
     public Track(String albumTitle, String interpret, long length, String soundFile, String title, byte[]albumImage) {
         this.albumTitle = albumTitle;
@@ -21,6 +24,9 @@ public class Track {
         this.soundFile = soundFile;
         this.title = title;
         this.albumImage=albumImage;
+         if (albumImage != null && albumImage.length > 0) {
+            this.coverImage = new Image(new ByteArrayInputStream(albumImage));
+         }
     }
 
     public long getId() {
@@ -28,8 +34,8 @@ public class Track {
     }
 
     public Image getAlbumImage() {
-       if (albumImage != null) {
-            return new Image(new ByteArrayInputStream(albumImage));
+       if (coverImage != null) {
+            return coverImage;
         } else {
             return null;
         }

@@ -40,5 +40,10 @@ public class PlaylistView extends BorderPane {
         return playListView;
     }
 
+    public ControlPane getControlPane() {
+		return controlPane;
+	}
+
+
     
 }

@@ -6,6 +6,7 @@ import de.hsrm.mi.enia.mp3player.business.MP3Player;
 import de.hsrm.mi.enia.mp3player.business.Playlist;
 import de.hsrm.mi.enia.mp3player.business.PlaylistManager;
 import de.hsrm.mi.enia.mp3player.business.Track;
+import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPaneController;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.SongTile;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.SongTileController;
 import javafx.collections.FXCollections;
@@ -18,11 +19,13 @@ public class PlaylistViewController extends BaseController<PlaylistView> {
     PlaylistManager manager;
     ListView<Track> playlistList;
     SongTileController songTileController;
+    ControlPaneController controlPaneController;
 
     public PlaylistViewController(PlaylistView playlistView, MP3Player player, PlaylistManager manager) {
         root = playlistView;
         this.player = player;
         this.manager = manager;
+        controlPaneController = new ControlPaneController(root.getControlPane(), player);
 
         playlistList = root.getPlaylistView();
 
@@ -44,6 +47,8 @@ public class PlaylistViewController extends BaseController<PlaylistView> {
 
     @Override
     public void initalize() {
+
+        controlPaneController.initalize();
 
     }
 

@@ -15,8 +15,8 @@ public class ControlPaneController extends BaseController <ControlPane> {
         this.player =player;
         
 
-        buttonPaneController = new ButtonPaneController(root.getButtonPane());
-        buttonPaneController.setPlayer(player);
+        buttonPaneController = new ButtonPaneController(root.getButtonPane(),player);
+  
 
 
 

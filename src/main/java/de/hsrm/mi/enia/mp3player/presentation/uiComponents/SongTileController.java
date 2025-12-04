@@ -26,7 +26,7 @@ public class SongTileController extends BaseController<SongTile> {
 
                 if (track != null && player != null) {
 
-                    player.play(track.getSoundFile());
+                    player.play(track);
                 }
 
             }

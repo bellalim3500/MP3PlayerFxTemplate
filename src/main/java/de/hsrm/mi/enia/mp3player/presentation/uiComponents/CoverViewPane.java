@@ -28,8 +28,7 @@ public class CoverViewPane extends StackPane{
 
        
         this.getChildren().addAll(coverView);
-       
-
+    
 
 
     }

@@ -3,33 +3,42 @@ package de.hsrm.mi.enia.mp3player.presentation.views;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ButtonTextPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.CoverViewPane;
+import de.hsrm.mi.enia.mp3player.presentation.uiComponents.TextPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
+
 
 public class PlayerView extends BorderPane {
 	
-	CoverViewPane coverViewPane;
+	CoverViewPane cover;
+	TextPane songInfo;
 	ControlPane controlPane;
 	
 	
 
 	public PlayerView() {
 
-		coverViewPane = new CoverViewPane();
+		cover = new CoverViewPane();
 		controlPane = new ControlPane();
+		songInfo=new TextPane();
 		
-		this.setCenter(coverViewPane);
+		this.setCenter(cover);
+		this.setCenter(songInfo);
 		this.setBottom(controlPane);
 	}
 
 
 	public CoverViewPane getCoverViewPane() {
-		return coverViewPane;
+		return cover;
 	}
 
 
 	public ControlPane getControlPane() {
 		return controlPane;
+	}
+
+
+	public TextPane getSongInfo() {
+		return songInfo;
 	}
 
 

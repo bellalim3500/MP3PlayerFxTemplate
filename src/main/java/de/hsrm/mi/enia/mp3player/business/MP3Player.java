@@ -2,6 +2,8 @@ package de.hsrm.mi.enia.mp3player.business;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.io.File;
 import java.util.Collections;
@@ -13,36 +15,77 @@ public class MP3Player {
     private Playlist aktPlaylist;
     private boolean repeat, shuffle;
 
+    private final ObjectProperty<Track> currentTrackPorperty = new SimpleObjectProperty<>();
+
     public MP3Player() {
         minim = new SimpleMinim(true);
     }
 
     public void play(String fileName) {
-         File file = new File(fileName);
-    System.out.println("Vollständiger Pfad: " + file.getAbsolutePath());
-    System.out.println("Datei existiert: " + file.exists());
-        System.out.println("Working Directory: " + System.getProperty("user.dir"));
+        // 1. Debugging: Was genau versuchen wir zu laden?
+        System.out.println("--> play() aufgerufen mit: " + fileName);
+        File f = new File(fileName);
+        System.out.println("--> Absoluter Pfad: " + f.getAbsolutePath());
+        System.out.println("--> Existiert Datei? " + f.exists());
+
         if (audioPlayer != null) {
-            audioPlayer.pause();
-            audioPlayer.skip(audioPlayer.length());
+            try {
+                audioPlayer.pause();
+            } catch (Exception e) { /* Ignorieren */ }
             audioPlayer = null;
         }
+
         if (audioPlayer == null) {
-            audioPlayer = minim.loadMP3File(fileName);
-            audioPlayer.play();
+            try {
+                audioPlayer = minim.loadMP3File(fileName);
+                audioPlayer.play();
+                System.out.println("--> Abspielen gestartet.");
+            } catch (Exception e) {
+                System.err.println("--> CRASH beim Abspielen!");
+                e.printStackTrace();
+            }
         }
+    }
+
+    // public void play(String fileName) {
+
+    //     if (audioPlayer != null) {
+    //         audioPlayer.pause();
+    //         audioPlayer.skip(audioPlayer.length());
+    //         audioPlayer = null;
+    //     }
+    //     if (audioPlayer == null) {
+    //         audioPlayer = minim.loadMP3File(fileName);
+    //         audioPlayer.play();
+    //     }
+    // }
+
+    public void play(Track track){
+
+        if(aktPlaylist==null|| track==null){
+        System.err.print(" Invalid trackIndex.");
+            return;
+            }
+
+            currentTrack =aktPlaylist.getList().indexOf(track);
+
+            if (currentTrack != -1){
+                playTrack(currentTrack);
+            }
+
     }
 
     public void playTrack(int trackIndex) {
 
         currentTrack = trackIndex;
         if (aktPlaylist == null || trackIndex < 0 || trackIndex >= aktPlaylist.numberOfTracks()) {
-          System.err.print(" Invalid trackIndex.");
+            System.err.print(" Invalid trackIndex.");
             return;
         }
         Track track = aktPlaylist.getTrack(trackIndex);
+        setCurrentTrack(track);
 
-        play("music" + File.separator + track.getSoundFile());
+        play("music" + track.getSoundFile());
 
     }
 
@@ -84,7 +127,7 @@ public class MP3Player {
             audioPlayer.pause();
         }
     }
- 
+
     public void playPlaylist() {
         if (shuffle) {
             Collections.shuffle(aktPlaylist.getList());
@@ -92,7 +135,7 @@ public class MP3Player {
 
         for (Track track : aktPlaylist.getList()) {
             do {
-                play("songs/" + track.getSoundFile());
+                play("music" + track.getSoundFile());
             } while (shuffle);
         }
     }
@@ -120,17 +163,22 @@ public class MP3Player {
             audioPlayer.skip(audioPlayer.length());
             audioPlayer = null;
             currentTrack = -1;
+            setCurrentTrack(null);
 
         }
 
     }
 
-    public Track getCurrentTrack() {
-        if (aktPlaylist != null && currentTrack >= 0 && currentTrack < aktPlaylist.numberOfTracks()) {
-            return aktPlaylist.getTrack(currentTrack);
-        }
-        return null;
+    public ObjectProperty<Track> getCurrentTrackProperty() {
+        return currentTrackPorperty;
+    }
 
+    public Track getCurrentTrack() {
+        return currentTrackPorperty.get();
+    }
+
+    private void setCurrentTrack(Track track){
+        this.currentTrackPorperty.set(track);
     }
 
     public void setAktPlaylist(Playlist aktPlaylist) {

@@ -7,7 +7,7 @@ public abstract class BaseController <T extends Node>{ //Node wegen ToolBar, son
 
     protected T root;
 
-    public abstract void initalize();
+    public abstract void initialize();
 
     public T getRoot(){
         return root;

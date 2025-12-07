@@ -2,7 +2,7 @@ package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.HBox;
+
 
 public class NavToolbar extends ToolBar {
 

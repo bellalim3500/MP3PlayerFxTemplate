@@ -1,11 +1,10 @@
 package de.hsrm.mi.enia.mp3player.business;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class PlaylistManager {
         return playlist.get("AllTracks");
     }
 
-    public void makePlaylist(String title, Date creationDate, String coverFile, String file)
+    public void makePlaylist(String title, LocalDate creationDate, String coverFile, String file)
             throws UnsupportedTagException, InvalidDataException {
 
         Playlist tracks = new Playlist(title, creationDate, coverFile);

@@ -1,6 +1,5 @@
 package de.hsrm.mi.enia.mp3player.presentation.views;
 
-import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ButtonTextPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.CoverViewPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.TextPane;

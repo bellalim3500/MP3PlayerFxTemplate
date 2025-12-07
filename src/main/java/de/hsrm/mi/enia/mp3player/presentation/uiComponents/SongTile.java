@@ -27,7 +27,7 @@ public class SongTile extends ListCell<Track> {
         super.updateItem(track, isEmpty);
         if(track!=null && !isEmpty){
             songInfo.update(track);
-            cover.coverView.setImage(track.getAlbumImage());
+            cover.coverView.setImage(track.getCoverImage());
 
             setGraphic(tile);
         } else {

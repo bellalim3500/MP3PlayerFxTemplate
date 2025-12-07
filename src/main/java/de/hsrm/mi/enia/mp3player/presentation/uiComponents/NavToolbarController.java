@@ -1,8 +1,6 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
-import de.hsrm.mi.enia.mp3player.business.Playlist;
 import de.hsrm.mi.enia.mp3player.presentation.views.BaseController;
-
 import de.hsrm.mi.enia.mp3player.presentation.views.PlayerView;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistView;
 import javafx.scene.layout.Pane;
@@ -18,11 +16,13 @@ public class NavToolbarController extends BaseController<NavToolbar> {
         this.playerView=playerView;
         this.playlistView=playlistViews;
 
+        initialize();
+
     
     }
 
     @Override
-    public void initalize() {
+    public void initialize() {
 
         setActiveView(playlistView);
        

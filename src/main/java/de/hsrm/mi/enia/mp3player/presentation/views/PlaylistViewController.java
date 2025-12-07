@@ -1,7 +1,5 @@
 package de.hsrm.mi.enia.mp3player.presentation.views;
 
-import java.util.List;
-
 import de.hsrm.mi.enia.mp3player.business.MP3Player;
 import de.hsrm.mi.enia.mp3player.business.Playlist;
 import de.hsrm.mi.enia.mp3player.business.PlaylistManager;
@@ -33,7 +31,7 @@ public class PlaylistViewController extends BaseController<PlaylistView> {
             SongTile tile = new SongTile();
             songTileController = new SongTileController(tile);
             songTileController.setPlayer(player);
-            songTileController.initalize();
+            songTileController.initialize();
             return tile;
         });
 
@@ -43,12 +41,13 @@ public class PlaylistViewController extends BaseController<PlaylistView> {
         ObservableList<Track> items = FXCollections.observableArrayList(playlist.getList());
         playlistList.setItems(items);
 
+        initialize();
+
     }
 
     @Override
-    public void initalize() {
+    public void initialize() {
 
-        controlPaneController.initalize();
 
     }
 

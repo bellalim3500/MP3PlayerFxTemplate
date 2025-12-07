@@ -12,35 +12,32 @@ public class Track {
     private String albumTitle;
     private String interpret;
     private String soundFile;
-    private byte[]albumImage;
+    private byte[] albumImage;
     private Image coverImage;
 
-   
-
-    public Track(String albumTitle, String interpret, long length, String soundFile, String title, byte[]albumImage) {
+    public Track(String albumTitle, String interpret, long length, String soundFile, String title, byte[] albumImage) {
         this.albumTitle = albumTitle;
         this.interpret = interpret;
         this.length = length;
         this.soundFile = soundFile;
         this.title = title;
-        this.albumImage=albumImage;
-         if (albumImage != null && albumImage.length > 0) {
+        this.albumImage = albumImage;
+        if (albumImage != null && albumImage.length > 0) {
             this.coverImage = new Image(new ByteArrayInputStream(albumImage));
-         }
+        }
     }
 
     public long getId() {
         return id;
     }
 
-    public Image getAlbumImage() {
-       if (coverImage != null) {
+    public Image getCoverImage() {
+        if (coverImage != null) {
             return coverImage;
         } else {
             return null;
         }
     }
-    
 
     public void setId(long id) {
         this.id = id;
@@ -58,7 +55,7 @@ public class Track {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(long length) {
         this.length = length;
     }
 
@@ -86,8 +83,4 @@ public class Track {
         this.soundFile = soundFile;
     }
 
-    
-
-
-    
 }

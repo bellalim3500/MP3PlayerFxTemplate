@@ -14,13 +14,22 @@ public class ProgressPane extends AnchorPane {
     public ProgressPane() {
         view = new HBox();
 
-        time = new Label("xx:xx");
+        time = new Label("00:00");
 
         progressBar = new ProgressBar();
+        progressBar.setPrefWidth(300);
 
         view.getChildren().addAll(progressBar, time);
 
         this.getChildren().add(view);
+    }
+    
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public Label getTimeLabel() {
+        return time;
     }
 
 }

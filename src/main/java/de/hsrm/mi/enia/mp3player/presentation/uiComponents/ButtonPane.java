@@ -1,7 +1,7 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -9,34 +9,31 @@ public class ButtonPane extends AnchorPane {
 
     HBox view;
 
-    Button repeatButton;
+
     Button previousButton;
-    Button pauseButton;
-    Button playButton;
+    Button playPauseButton;
+    
     Button skipButton;
     Button shuffleButton;
 
     public ButtonPane() {
         view= new HBox();
-        repeatButton = new Button("repeat");
-        repeatButton.setId("repeatButton");
+      
         shuffleButton = new Button("shuffle");
         shuffleButton.setId("shuffleButton");
-        previousButton = new Button("rewind");
+        previousButton = new Button("previous");
         previousButton.setId("previousButton");
-        playButton = new Button("play");
-        playButton.setId("playButton");
+        playPauseButton = new Button("Play");
+        playPauseButton.setId("playPauseButton");
         skipButton = new Button("skip");
         skipButton.setId("skipButton");
-        playButton.getStyleClass().addAll("buttonPane");
-        pauseButton = new Button("pause");
-        pauseButton.setId("pauseButton");
-
+        playPauseButton.getStyleClass().addAll("buttonPane");
+       
         view.getChildren().addAll(
-            repeatButton,
+  
             previousButton,
-            playButton,
-            pauseButton,
+            playPauseButton,
+        
             skipButton,
             shuffleButton
             );
@@ -48,20 +45,15 @@ public class ButtonPane extends AnchorPane {
 
     }
 
-    public Button getRepeatButton() {
-        return repeatButton;
-    }
 
     public Button getPreviousButton() {
         return previousButton;
     }
 
-    public Button getPauseButton() {
-        return pauseButton;
-    }
 
-    public Button getPlayButton() {
-        return playButton;
+
+    public Button getPlayPauseButton() {
+        return playPauseButton;
     }
 
     public Button getSkipButton() {

@@ -1,10 +1,8 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import de.hsrm.mi.enia.mp3player.business.MP3Player;
+import de.hsrm.mi.enia.mp3player.business.Track;
 import de.hsrm.mi.enia.mp3player.presentation.views.BaseController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 
 public class ButtonPaneController extends BaseController<ButtonPane> {
 
@@ -13,16 +11,25 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
     public ButtonPaneController(ButtonPane view, MP3Player player) {
         this.root = view;
         this.player = player;
+
+        initialize();
     }
 
     @Override
-    public void initalize() {
+    public void initialize() {
 
-        root.getRepeatButton().setOnAction(e -> player.repeat());
         root.getPreviousButton().setOnAction(e -> player.previous());
-        root.getPlayButton().setOnAction(e -> player.play(player.getCurrentTrack().getSoundFile()));
+        root.getPlayPauseButton().setOnAction(e -> {
+            if (player.isPlaying()) {
+                player.pause();
+                root.getPlayPauseButton().setText("Play");
+            } else {
+                player.resume();
+                root.getPlayPauseButton().setText("Pause");
+            }
+        });
         root.getSkipButton().setOnAction(e -> player.skip());
-        root.getPauseButton().setOnAction(e -> player.pause());
+
         root.getShuffleButton().setOnAction(e -> player.shuffle());
 
     }

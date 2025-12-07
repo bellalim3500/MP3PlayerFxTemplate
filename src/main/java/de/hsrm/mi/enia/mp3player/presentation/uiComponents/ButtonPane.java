@@ -9,16 +9,15 @@ public class ButtonPane extends AnchorPane {
 
     HBox view;
 
-
     Button previousButton;
     Button playPauseButton;
-    
+
     Button skipButton;
     Button shuffleButton;
 
     public ButtonPane() {
-        view= new HBox();
-      
+        view = new HBox();
+
         shuffleButton = new Button("shuffle");
         shuffleButton.setId("shuffleButton");
         previousButton = new Button("previous");
@@ -28,29 +27,22 @@ public class ButtonPane extends AnchorPane {
         skipButton = new Button("skip");
         skipButton.setId("skipButton");
         playPauseButton.getStyleClass().addAll("buttonPane");
-       
+
         view.getChildren().addAll(
-  
-            previousButton,
-            playPauseButton,
-        
-            skipButton,
-            shuffleButton
-            );
 
-            this.getChildren().add(view);
-            
-           
+                previousButton,
+                playPauseButton,
 
+                skipButton,
+                shuffleButton);
+
+        this.getChildren().add(view);
 
     }
-
 
     public Button getPreviousButton() {
         return previousButton;
     }
-
-
 
     public Button getPlayPauseButton() {
         return playPauseButton;

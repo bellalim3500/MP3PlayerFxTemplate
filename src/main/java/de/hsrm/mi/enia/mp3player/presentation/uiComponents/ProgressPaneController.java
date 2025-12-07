@@ -20,16 +20,18 @@ public class ProgressPaneController extends BaseController<ProgressPane> {
     }
 
     public void updateTimeLabel() {
+        if (player.getCurrentTrack() == null)
+            return;
 
         double progress = player.progressProperty().get();
 
-        long totalMs = player.getCurrentTrack().getLength(); // echte Länge in ms
-        long currentMs = (long) (progress * totalMs); // aktuelle Zeit in ms
+        long totalMs = player.getCurrentTrack().getLength() ; // korrekt!
+        long currentMs = (long) (progress * totalMs);
 
         int minutes = (int) (currentMs / 1000 / 60);
         int seconds = (int) ((currentMs / 1000) % 60);
 
-        root.getTimeLabel().setText(
-                String.format("%02d:%02d", minutes, seconds));
+        root.getTimeLabel().setText( String.format("%02d:%02d", minutes, seconds));
     }
+
 }

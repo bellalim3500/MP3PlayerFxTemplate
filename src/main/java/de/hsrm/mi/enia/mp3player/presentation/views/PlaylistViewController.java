@@ -37,6 +37,7 @@ public class PlaylistViewController extends BaseController<PlaylistView> {
 
         // umformen in observable
         Playlist playlist = player.getAktPlaylist();
+        root.getTitleLabel().setText(playlist.getTitle());
 
         ObservableList<Track> items = FXCollections.observableArrayList(playlist.getList());
         playlistList.setItems(items);

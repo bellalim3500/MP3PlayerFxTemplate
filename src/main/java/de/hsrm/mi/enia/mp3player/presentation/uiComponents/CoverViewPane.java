@@ -20,8 +20,8 @@ public class CoverViewPane extends StackPane{
         DEFAULT_IMAGE = new Image(getClass().getResource("/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available-236105299.jpg").toExternalForm());
         coverView= new ImageView();
         coverView.setPreserveRatio(true);
-        coverView.setFitWidth(500);
-        coverView.setFitHeight(400);
+        coverView.setFitWidth(200);
+        coverView.setFitHeight(200);
         coverView.setImage(DEFAULT_IMAGE);
 
        

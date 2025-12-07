@@ -2,7 +2,6 @@ package de.hsrm.mi.enia.mp3player.business;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
-import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -28,20 +27,23 @@ public class MP3Player {
             volume(newValue.floatValue());
 
         });
-        new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                if (audioPlayer != null && getCurrentTrack() != null) {
 
-                    double pos = audioPlayer.position(); // Echtzeit der Wiedergabe
-                    double total = getCurrentTrack().getLength(); // Echte Länge aus MP3-Tag
+    }
 
-                    if (total > 0) {
-                        progressProperty.set(pos / total);
-                    }
-                }
-            }
-        }.start();
+    public void update() {
+        if (audioPlayer == null || currentTrackProperty.get() == null) {
+            return;
+        }
+
+        double pos = audioPlayer.position();
+        double total = currentTrackProperty.get().getLength();
+
+        progressProperty.set(pos / total);
+
+        // Track zu Ende → skip
+        if (!audioPlayer.isPlaying() && pos >= total && total > 0) {
+            skip();
+        }
     }
 
     public void playFile(String fileName) {

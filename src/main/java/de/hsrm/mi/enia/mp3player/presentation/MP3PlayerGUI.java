@@ -31,17 +31,12 @@ public class MP3PlayerGUI extends Application {
 	private Stage primaryStage;
 	private PlayerView playerView;
 	private PlaylistView playlistView;
-	private PlayerViewController playerViewController;
 	private PlaylistManager playlistManager;
 	private MP3Player player;
-
-	private Map<String, Pane> views;
 
 	@Override
 	public void init() {
 
-		// Initialisierung der Businessklassen
-		views = new HashMap<>();
 
 	}
 
@@ -49,6 +44,7 @@ public class MP3PlayerGUI extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		player = new MP3Player();
+		new AnimationMonitor(player);
 		playlistManager = new PlaylistManager();
 		Playlist playlist = playlistManager.getAllTracks();
 		player.setAktPlaylist(playlist);
@@ -56,13 +52,8 @@ public class MP3PlayerGUI extends Application {
 		playerView = new PlayerView();
 		playlistView = new PlaylistView();
 
-		this.playerViewController = new PlayerViewController(playerView, player);
-
-		PlaylistViewController playlistViewController = new PlaylistViewController(playlistView, player,
-				playlistManager);
-
-		new AnimationMonitor(player);
-
+		PlayerViewController playerViewController= new PlayerViewController(playerView, player);
+		PlaylistViewController playlistViewController = new PlaylistViewController(playlistView, player,playlistManager);
 		NavToolbar navToolbar = new NavToolbar();
 
 		StackPane contentPane = new StackPane(playlistView, playerView);
@@ -70,9 +61,8 @@ public class MP3PlayerGUI extends Application {
 		playlistView.setVisible(true);
 		playerView.setVisible(false);
 
-		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView,
-				playlistView);
-		navToolbarController.initialize();
+		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView,playlistView);
+	
 
 		BorderPane root = new BorderPane();
 		root.setCenter(contentPane);

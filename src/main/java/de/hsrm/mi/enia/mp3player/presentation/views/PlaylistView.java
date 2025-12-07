@@ -12,21 +12,17 @@ public class PlaylistView extends BorderPane {
     private ListView<Track> playListView;
     private ControlPane controlPane;
 
-    public PlaylistView() {
-        // titleLabel = new Label(playlist.getTitle());
 
-        //ListView
+    public PlaylistView() {
+        titleLabel = new Label();
+
         playListView = new  ListView<>();
 
         controlPane = new ControlPane();
-
-        // Titel oben
         this.setTop(titleLabel);
-
-        // Playlist in der Mitte
         this.setCenter(playListView);
 
-        // ControlPane unten
+      
         this.setBottom(controlPane);
     }
 

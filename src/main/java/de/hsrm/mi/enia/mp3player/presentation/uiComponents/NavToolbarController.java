@@ -39,6 +39,16 @@ public class NavToolbarController extends BaseController<NavToolbar> {
         playlistView.setVisible(false);
 
         active.setVisible(true);
+
+           root.getPlayerButton().getStyleClass().remove("nav-tab-selected");
+    root.getPlaylistButton().getStyleClass().remove("nav-tab-selected");
+
+    // add style to active
+    if (active == playerView) {
+        root.getPlayerButton().getStyleClass().add("nav-tab-selected");
+    } else {
+        root.getPlaylistButton().getStyleClass().add("nav-tab-selected");
+    }
         
     }
     

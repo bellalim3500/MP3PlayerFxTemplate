@@ -23,7 +23,9 @@ public class TextPane extends AnchorPane{
         title = new Text();
         album = new Text();
 
-        text.getChildren().addAll(title, artist, album);
+       title.getStyleClass().add("title-label");
+artist.getStyleClass().add("artist-label");
+album.getStyleClass().add("album-label");
         this.getChildren().add(text);
 
 

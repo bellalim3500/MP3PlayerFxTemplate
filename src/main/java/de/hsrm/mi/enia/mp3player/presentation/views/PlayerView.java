@@ -3,6 +3,7 @@ package de.hsrm.mi.enia.mp3player.presentation.views;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.CoverViewPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.TextPane;
+import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 
 
@@ -23,6 +24,7 @@ public class PlayerView extends BorderPane {
 		this.setTop(cover);
 		this.setCenter(songInfo);
 		this.setBottom(controlPane);
+		BorderPane.setAlignment(cover, Pos.CENTER);
 	}
 
 

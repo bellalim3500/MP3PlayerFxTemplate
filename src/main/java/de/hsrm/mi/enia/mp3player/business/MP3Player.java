@@ -30,6 +30,10 @@ public class MP3Player {
 
     }
 
+    public boolean isShuffle() {
+        return shuffle;
+    }
+
     public void update() {
         if (audioPlayer == null || currentTrackProperty.get() == null) {
             return;

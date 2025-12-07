@@ -1,5 +1,6 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 
 import javafx.scene.layout.AnchorPane;
@@ -16,17 +17,21 @@ public class ButtonPane extends AnchorPane {
     Button shuffleButton;
 
     public ButtonPane() {
-        view = new HBox();
+        view = new HBox(20);            // 20px Abstand zwischen Buttons
+view.setAlignment(Pos.CENTER);
 
-        shuffleButton = new Button("shuffle");
+        shuffleButton = new Button("🔀");
+        previousButton = new Button("⏮");
+        playPauseButton = new Button("▶"); // Start immer Play
+        skipButton = new Button("⏭");
+
         shuffleButton.setId("shuffleButton");
-        previousButton = new Button("previous");
+
         previousButton.setId("previousButton");
-        playPauseButton = new Button("Play");
+
         playPauseButton.setId("playPauseButton");
-        skipButton = new Button("skip");
+
         skipButton.setId("skipButton");
-        playPauseButton.getStyleClass().addAll("buttonPane");
 
         view.getChildren().addAll(
 

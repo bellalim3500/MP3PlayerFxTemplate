@@ -1,6 +1,7 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -14,6 +15,8 @@ public class ControlPane extends AnchorPane {
     public ControlPane() {
 
         view = new VBox();
+        view.setSpacing(15);          // Abstand zwischen ProgressBar, Text & Buttons
+view.setAlignment(Pos.CENTER);
 
         buttonPane = new ButtonPane();
         songInfo = new TextPane();

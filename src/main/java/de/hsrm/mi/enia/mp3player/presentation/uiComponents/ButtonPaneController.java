@@ -21,23 +21,23 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
         root.getPlayPauseButton().setOnAction(e -> {
             if (player.getCurrentTrack() == null) {
                 player.playTrack(0);
-                root.getPlayPauseButton().setText("Pause");
+                root.getPlayPauseButton().setText("⏸");
                 return;
             }
-             if (!player.getAudioPlayer().isPlaying()
+            if (!player.getAudioPlayer().isPlaying()
                     && player.getAudioPlayer().position() >= player.getAudioPlayer().length()) {
 
                 player.skip();
-                root.getPlayPauseButton().setText("Pause");
+                root.getPlayPauseButton().setText("⏸");
                 return;
             }
 
             if (player.isPlaying()) {
                 player.pause();
-                root.getPlayPauseButton().setText("Play");
+                root.getPlayPauseButton().setText("▶");
             } else {
                 player.resume();
-                root.getPlayPauseButton().setText("Pause");
+                root.getPlayPauseButton().setText("⏸");
             }
         });
 
@@ -48,8 +48,13 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
         });
         root.getSkipButton().setOnAction(e -> player.skip());
 
-        root.getShuffleButton().setOnAction(e -> player.shuffle());
-
+        root.getShuffleButton().setOnAction(e -> {
+            player.shuffle();
+            if (player.isShuffle()) {
+                root.getShuffleButton().setStyle("-fx-background-color: #8d6e63;");
+            } else {
+                root.getShuffleButton().setStyle("");
+            }
+        });
     }
-
 }

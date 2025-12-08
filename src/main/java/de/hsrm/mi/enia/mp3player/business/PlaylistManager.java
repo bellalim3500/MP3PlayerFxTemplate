@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -50,6 +49,7 @@ public class PlaylistManager {
 
                     if (mp3.hasId3v2Tag()) {
                         ID3v2 tag = mp3.getId3v2Tag();
+                      
 
                         Track track = new Track(tag.getAlbum(), tag.getArtist(), tag.getLength(), "music/" + line,
                                 tag.getTitle(), tag.getAlbumImage());

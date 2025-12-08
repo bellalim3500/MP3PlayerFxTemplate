@@ -43,7 +43,7 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
 
         player.getCurrentTrackProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {
-                root.getPlayPauseButton().setText("Pause");
+                root.getPlayPauseButton().setText("⏸");
             }
         });
         root.getSkipButton().setOnAction(e -> player.skip());

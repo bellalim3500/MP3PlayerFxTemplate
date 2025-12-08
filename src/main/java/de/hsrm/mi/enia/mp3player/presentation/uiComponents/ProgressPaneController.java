@@ -16,22 +16,8 @@ public class ProgressPaneController extends BaseController<ProgressPane> {
     @Override
     public void initialize() {
         root.getProgressBar().progressProperty().bind(player.progressProperty());
-        player.progressProperty().addListener((obs, oldValue, newValue) -> updateTimeLabel());
+        root.getTimeLabel().textProperty().bind(player.timeProperty());
     }
 
-    public void updateTimeLabel() {
-        if (player.getCurrentTrack() == null)
-            return;
-
-        double progress = player.progressProperty().get();
-
-        long totalMs = player.getCurrentTrack().getLength() ; // korrekt!
-        long currentMs = (long) (progress * totalMs);
-
-        int minutes = (int) (currentMs / 1000 / 60);
-        int seconds = (int) ((currentMs / 1000) % 60);
-
-        root.getTimeLabel().setText( String.format("%02d:%02d", minutes, seconds));
-    }
-
+  
 }

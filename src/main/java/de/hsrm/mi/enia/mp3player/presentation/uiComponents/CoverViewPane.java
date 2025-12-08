@@ -2,10 +2,13 @@ package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 
-public class CoverViewPane extends StackPane{
+public class CoverViewPane extends AnchorPane{
+
+
 
     // private Image image;
     public ImageView coverView;
@@ -23,11 +26,7 @@ public class CoverViewPane extends StackPane{
         coverView.setFitWidth(200);
         coverView.setFitHeight(200);
         coverView.setImage(DEFAULT_IMAGE);
-
-       
-
-
-       
+        
         this.getChildren().addAll(coverView);
     
 

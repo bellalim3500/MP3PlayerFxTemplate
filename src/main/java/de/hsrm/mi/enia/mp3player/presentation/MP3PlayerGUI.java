@@ -1,16 +1,10 @@
 package de.hsrm.mi.enia.mp3player.presentation;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import de.hsrm.mi.enia.mp3player.business.MP3Player;
 import de.hsrm.mi.enia.mp3player.business.Playlist;
 import de.hsrm.mi.enia.mp3player.business.PlaylistManager;
-import de.hsrm.mi.enia.mp3player.presentation.uiComponents.AnimationMonitor;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.NavToolbar;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.NavToolbarController;
-
 import de.hsrm.mi.enia.mp3player.presentation.views.PlayerView;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlayerViewController;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistView;
@@ -18,7 +12,6 @@ import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistViewController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -44,7 +37,7 @@ public class MP3PlayerGUI extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		player = new MP3Player();
-		new AnimationMonitor(player);
+	
 		playlistManager = new PlaylistManager();
 		Playlist playlist = playlistManager.getAllTracks();
 		player.setAktPlaylist(playlist);
@@ -82,7 +75,7 @@ public class MP3PlayerGUI extends Application {
 
 	@Override
 	public void stop() {
-		// Beeneden moeglicher Prozesse - z.B. das Abspielen von Songs
+		
 
 	}
 

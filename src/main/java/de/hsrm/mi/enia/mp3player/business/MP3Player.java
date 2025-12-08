@@ -2,6 +2,7 @@ package de.hsrm.mi.enia.mp3player.business;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -15,6 +16,8 @@ public class MP3Player {
     private SimpleAudioPlayer audioPlayer;
     private Playlist aktPlaylist;
     private boolean shuffle;
+    private Thread progressThread;
+    private boolean running;
 
     private final ObjectProperty<Track> currentTrackProperty = new SimpleObjectProperty<>();
     private final DoubleProperty volumeProperty = new SimpleDoubleProperty(0);
@@ -22,7 +25,7 @@ public class MP3Player {
     private final StringProperty timeProperty = new SimpleStringProperty("00:00");
 
     public MP3Player() {
-        minim = new SimpleMinim(true);
+        minim = new SimpleMinim();
         volumeProperty.addListener((obs, oldValue, newValue) -> {
             volume(newValue.floatValue());
 
@@ -30,23 +33,48 @@ public class MP3Player {
 
     }
 
-    public boolean isShuffle() {
-        return shuffle;
+    private void startProgressThread() {
+        running = true;
+
+        progressThread = new Thread(() -> {
+            while (running) {
+                try {
+                    if (audioPlayer != null && currentTrackProperty.get() != null) {
+
+                        double pos = audioPlayer.position();
+                        double total = currentTrackProperty.get().getLength();
+
+                        long currentMs = (long) pos;
+                        int minutes = (int) (currentMs / 1000 / 60);
+                        int seconds = (int) ((currentMs / 1000) % 60);
+
+                       
+                        Platform.runLater(() -> {
+                            progressProperty.set(pos / total);
+                            timeProperty.set(String.format("%02d:%02d", minutes, seconds));
+                        });
+
+                        if (!audioPlayer.isPlaying() && pos >= total && total > 0) {
+                            skip(); // darf Businesslogik methoden aufrufen
+                        }
+                    }
+
+                    Thread.sleep(200);
+
+                } catch (InterruptedException e) {
+                    running = false;
+                }
+            }
+        });
+
+        progressThread.start();
     }
 
-    public void update() {
-        if (audioPlayer == null || currentTrackProperty.get() == null) {
-            return;
-        }
+    private void stopProgressThread() {
+        running = false;
+        if (progressThread != null) {
+            progressThread.interrupt();
 
-        double pos = audioPlayer.position();
-        double total = currentTrackProperty.get().getLength();
-
-        progressProperty.set(pos / total);
-
-        // Track zu Ende → skip
-        if (!audioPlayer.isPlaying() && pos >= total && total > 0) {
-            skip();
         }
     }
 
@@ -58,10 +86,30 @@ public class MP3Player {
             audioPlayer = null;
         }
         audioPlayer = minim.loadMP3File(fileName);
-        audioPlayer.play();
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                audioPlayer.play();
+
+            }
+        }).start();
+
+        stopProgressThread();
+        ;
+        startProgressThread();
 
         progressProperty.set(0);
         timeProperty.set("00:00");
+    }
+
+    public boolean isShuffle() {
+        return shuffle;
+    }
+
+    public void update() {
+
     }
 
     public void play(Track track) {
@@ -101,7 +149,7 @@ public class MP3Player {
 
     }
 
-    public void skip() {
+    public synchronized void skip() {
         if (aktPlaylist == null || aktPlaylist.numberOfTracks() == 0) {
             System.err.print(" Invalid Playlist. Skip not possible");
             return;
@@ -122,7 +170,7 @@ public class MP3Player {
         playTrack(nextIndex);
     }
 
-    public void previous() {
+    public synchronized void previous() {
         if (aktPlaylist == null || aktPlaylist.numberOfTracks() == 0) {
             System.err.print(" Invalid Playlist. Skip not possible");
             return;
@@ -137,7 +185,13 @@ public class MP3Player {
 
     public void resume() {
         if (audioPlayer != null && !audioPlayer.isPlaying()) {
-            audioPlayer.play();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    audioPlayer.play();
+                }
+            }).start();
+
         }
     }
 

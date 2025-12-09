@@ -3,7 +3,7 @@ package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
+
 
 
 public class CoverViewPane extends AnchorPane{

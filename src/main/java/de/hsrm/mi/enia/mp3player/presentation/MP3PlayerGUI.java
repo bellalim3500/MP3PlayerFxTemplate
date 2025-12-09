@@ -10,6 +10,7 @@ import de.hsrm.mi.enia.mp3player.presentation.views.PlayerViewController;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistView;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistViewController;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -30,14 +31,13 @@ public class MP3PlayerGUI extends Application {
 	@Override
 	public void init() {
 
-
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
 		player = new MP3Player();
-	
+
 		playlistManager = new PlaylistManager();
 		Playlist playlist = playlistManager.getAllTracks();
 		player.setAktPlaylist(playlist);
@@ -45,8 +45,9 @@ public class MP3PlayerGUI extends Application {
 		playerView = new PlayerView();
 		playlistView = new PlaylistView();
 
-		PlayerViewController playerViewController= new PlayerViewController(playerView, player);
-		PlaylistViewController playlistViewController = new PlaylistViewController(playlistView, player,playlistManager);
+		PlayerViewController playerViewController = new PlayerViewController(playerView, player);
+		PlaylistViewController playlistViewController = new PlaylistViewController(playlistView, player,
+				playlistManager);
 		NavToolbar navToolbar = new NavToolbar();
 
 		StackPane contentPane = new StackPane(playlistView, playerView);
@@ -54,12 +55,12 @@ public class MP3PlayerGUI extends Application {
 		playlistView.setVisible(true);
 		playerView.setVisible(false);
 
-		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView,playlistView);
-	
+		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView, playlistView);
 
 		BorderPane root = new BorderPane();
 		root.setCenter(contentPane);
 		root.setBottom(navToolbar);
+
 
 		this.primaryStage = primaryStage;
 		Scene scene = new Scene(root, 500, 400);
@@ -75,7 +76,6 @@ public class MP3PlayerGUI extends Application {
 
 	@Override
 	public void stop() {
-		
 
 	}
 

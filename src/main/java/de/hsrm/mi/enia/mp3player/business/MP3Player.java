@@ -48,15 +48,15 @@ public class MP3Player {
                         int minutes = (int) (currentMs / 1000 / 60);
                         int seconds = (int) ((currentMs / 1000) % 60);
 
-                       
                         Platform.runLater(() -> {
                             progressProperty.set(pos / total);
                             timeProperty.set(String.format("%02d:%02d", minutes, seconds));
                         });
 
-                        if (!audioPlayer.isPlaying() && pos >= total && total > 0) {
-                            skip(); // darf Businesslogik methoden aufrufen
+                        if (!audioPlayer.isPlaying() && audioPlayer.position() > 200) {
+                           Platform.runLater(() -> skip());
                         }
+
                     }
 
                     Thread.sleep(200);
@@ -238,10 +238,9 @@ public class MP3Player {
         return currentTrackProperty.get();
     }
 
-    private void setCurrentTrack(Track track) {
-        this.currentTrackProperty.set(track);
-    }
-
+  private void setCurrentTrack(Track track) {
+    Platform.runLater(() -> currentTrackProperty.set(track));
+}
     public DoubleProperty getVolumeProperty() {
         return volumeProperty;
 

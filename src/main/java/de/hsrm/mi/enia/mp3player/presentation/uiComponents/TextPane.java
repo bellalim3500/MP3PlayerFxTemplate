@@ -1,6 +1,7 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import de.hsrm.mi.enia.mp3player.business.Track;
+import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
@@ -23,10 +24,12 @@ public class TextPane extends AnchorPane{
         title = new Text();
         album = new Text();
 
-       title.getStyleClass().add("title-label");
-artist.getStyleClass().add("artist-label");
-album.getStyleClass().add("album-label");
+        text.getChildren().addAll(title,artist,album);
+
+
+     
         this.getChildren().add(text);
+
 
 
 

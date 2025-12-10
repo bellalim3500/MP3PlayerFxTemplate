@@ -23,7 +23,7 @@ public class CoverViewPane extends AnchorPane{
         DEFAULT_IMAGE = new Image(getClass().getResource("/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available-236105299.jpg").toExternalForm());
         coverView= new ImageView();
         coverView.setPreserveRatio(true);
-        coverView.setFitWidth(200);
+        coverView.fitWidthProperty().bind(widthProperty());
         coverView.setFitHeight(200);
         coverView.setImage(DEFAULT_IMAGE);
         

@@ -11,7 +11,8 @@ public class NavToolbar extends ToolBar {
     private Button playlist;
 
     public NavToolbar(){
-        
+
+    
         player= new Button ("Player");
         playlist = new Button("Playlist");
 

@@ -39,8 +39,6 @@ public class PlayerViewController extends BaseController<PlayerView> {
 
         }
 
-        
-
     }
 
     private void updateView(Track track) {

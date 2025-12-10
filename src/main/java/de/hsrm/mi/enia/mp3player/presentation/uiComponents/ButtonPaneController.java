@@ -6,10 +6,15 @@ import de.hsrm.mi.enia.mp3player.presentation.views.BaseController;
 public class ButtonPaneController extends BaseController<ButtonPane> {
 
     private MP3Player player;
+    private VolumePaneController volumePaneController;
 
     public ButtonPaneController(ButtonPane view, MP3Player player) {
+        
         this.root = view;
         this.player = player;
+        volumePaneController = new VolumePaneController(root.getVolumePane());
+        volumePaneController.setPlayer(player); 
+        volumePaneController.initialize();
 
         initialize();
     }

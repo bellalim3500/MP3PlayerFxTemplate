@@ -1,27 +1,22 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import javafx.scene.control.Slider;
-
 import javafx.scene.layout.HBox;
 
-import javafx.scene.layout.AnchorPane;
+public class VolumePane extends HBox {
 
-public class VolumePane extends AnchorPane {
-
-    private HBox view;
+   
     private Slider volumeSlider;
 
     public VolumePane() {
-        view = new HBox();
+      
         volumeSlider = new Slider();
-        volumeSlider.setId("volumeSlider");
+        volumeSlider.setPrefWidth(150);
+        volumeSlider.setMaxWidth(250);
+        volumeSlider.setMinWidth(80);
 
-        view.getChildren().addAll(
+        this.getChildren().addAll(
                 volumeSlider);
-
-        this.getChildren().add(view);
-
-
   
     }
 

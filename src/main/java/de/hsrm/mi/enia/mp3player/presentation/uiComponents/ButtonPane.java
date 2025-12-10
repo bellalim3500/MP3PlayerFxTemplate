@@ -2,46 +2,37 @@ package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
-public class ButtonPane extends AnchorPane {
+public class ButtonPane extends HBox {
 
-    HBox view;
-
-    Button previousButton;
-    Button playPauseButton;
-
-    Button skipButton;
-    Button shuffleButton;
+    private Button previousButton;
+    private Button playPauseButton;
+    private Button skipButton;
+    private Button shuffleButton;
+    private VolumePane volumePane;
 
     public ButtonPane() {
-        view = new HBox(20);            // 20px Abstand zwischen Buttons
-view.setAlignment(Pos.CENTER);
+        this.setSpacing(15);
+        this.setAlignment(Pos.CENTER);
 
         shuffleButton = new Button("🔀");
         previousButton = new Button("⏮");
         playPauseButton = new Button("▶"); // Start immer Play
         skipButton = new Button("⏭");
+        volumePane = new VolumePane();
 
-        shuffleButton.setId("shuffleButton");
-
-        previousButton.setId("previousButton");
-
-        playPauseButton.setId("playPauseButton");
-
-        skipButton.setId("skipButton");
-
-        view.getChildren().addAll(
+        HBox.setHgrow(volumePane,Priority.ALWAYS);
+volumePane.setMaxWidth(Double.MAX_VALUE);
+        this.getChildren().addAll(
 
                 previousButton,
                 playPauseButton,
-
                 skipButton,
-                shuffleButton);
+                shuffleButton,
+                volumePane);
 
-        this.getChildren().add(view);
 
     }
 
@@ -59,5 +50,9 @@ view.setAlignment(Pos.CENTER);
 
     public Button getShuffleButton() {
         return shuffleButton;
+    }
+
+    public VolumePane getVolumePane(){
+        return volumePane;
     }
 }

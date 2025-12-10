@@ -10,7 +10,6 @@ import de.hsrm.mi.enia.mp3player.presentation.views.PlayerViewController;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistView;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistViewController;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -50,27 +49,19 @@ public class MP3PlayerGUI extends Application {
 				playlistManager);
 		NavToolbar navToolbar = new NavToolbar();
 
-		StackPane contentPane = new StackPane(playlistView, playerView);
-
-		playlistView.setVisible(true);
-		playerView.setVisible(false);
-
-		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView, playlistView);
-
 		BorderPane root = new BorderPane();
-		root.setCenter(contentPane);
+		root.setCenter(playlistView);
 		root.setBottom(navToolbar);
-
+		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView, playlistView,
+				root);
 
 		this.primaryStage = primaryStage;
 		Scene scene = new Scene(root, 500, 400);
 		scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 		primaryStage.setScene(scene);
 
-		// switchRoot("PLAYER");
 		primaryStage.setTitle("Player");
 		primaryStage.show();
-		this.primaryStage = primaryStage;
 
 	}
 

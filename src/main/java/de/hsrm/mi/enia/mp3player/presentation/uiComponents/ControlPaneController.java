@@ -6,7 +6,6 @@ import de.hsrm.mi.enia.mp3player.presentation.views.BaseController;
 public class ControlPaneController extends BaseController<ControlPane> {
 
     private ButtonPaneController buttonPaneController;
-    private VolumePaneController volumePaneController;
     private MP3Player player;
     private ProgressPaneController progressPaneController;
 
@@ -15,10 +14,7 @@ public class ControlPaneController extends BaseController<ControlPane> {
         this.player = player;
 
         buttonPaneController = new ButtonPaneController(root.getButtonPane(), player);
-        volumePaneController = new VolumePaneController(root.getVolumePane());
-        volumePaneController.setPlayer(player);
         progressPaneController = new ProgressPaneController(root.getProgressPane(), player);
-        volumePaneController.initialize();
 
         initialize();
     }

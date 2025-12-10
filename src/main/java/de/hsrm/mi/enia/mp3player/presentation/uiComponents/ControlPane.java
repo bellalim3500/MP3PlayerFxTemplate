@@ -5,27 +5,24 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class ControlPane extends AnchorPane {
-    VBox view;
+public class ControlPane extends VBox {
+
+
     ButtonPane buttonPane;
-    TextPane songInfo;
     ProgressPane progressPane;
-    VolumePane volumePane;
+
 
     public ControlPane() {
 
-        view = new VBox();
-        view.setSpacing(15);          // Abstand zwischen ProgressBar, Text & Buttons
-view.setAlignment(Pos.CENTER);
-
+        this.setSpacing(12);
+        this.setAlignment(Pos.CENTER);
+        setFillWidth(true);
+ 
         buttonPane = new ButtonPane();
-        songInfo = new TextPane();
         progressPane = new ProgressPane();
-        volumePane = new VolumePane();
 
-        view.getChildren().addAll(progressPane, songInfo, buttonPane, volumePane);
-
-        this.getChildren().add(view);
+        this.getChildren().addAll(progressPane, buttonPane);
+       
 
     }
 
@@ -36,15 +33,5 @@ view.setAlignment(Pos.CENTER);
     public ProgressPane getProgressPane() {
         return progressPane;
     }
-
-    public VolumePane getVolumePane() {
-        return volumePane;
-    }
-
-    public TextPane getSongInfo() {
-        return songInfo;
-    }   
-
-    
 
 }

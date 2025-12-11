@@ -25,7 +25,7 @@ public class NavToolbarController extends BaseController<NavToolbar> {
     @Override
     public void initialize() {
 
-        setActiveView(playerView);
+        setActiveView(playlistView);
 
         root.getPlayerButton().setOnAction(e -> setActiveView(playerView));
         root.getPlaylistButton().setOnAction(e -> setActiveView(playlistView));

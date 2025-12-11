@@ -23,7 +23,6 @@ public class PlaylistViewController extends BaseController<PlaylistView> {
         root = playlistView;
         this.player = player;
         this.manager = manager;
-        controlPaneController = new ControlPaneController(root.getControlPane(), player);
 
         playlistList = root.getPlaylistView();
 

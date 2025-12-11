@@ -1,29 +1,25 @@
 package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 
-
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class ControlPane extends VBox {
 
-
-    ButtonPane buttonPane;
-    ProgressPane progressPane;
-
+    private ButtonPane buttonPane;
+    private ProgressPane progressPane;
 
     public ControlPane() {
-
         this.setSpacing(12);
-        this.setAlignment(Pos.CENTER);
-        setFillWidth(true);
- 
-        buttonPane = new ButtonPane();
+        setPadding(new Insets(12,12,12,12));
+        setAlignment(Pos.CENTER);
+        
+            getStyleClass().add("control-pane");
+
         progressPane = new ProgressPane();
+        buttonPane = new ButtonPane();
 
-        this.getChildren().addAll(progressPane, buttonPane);
-       
-
+        getChildren().addAll(progressPane, buttonPane);
     }
 
     public ButtonPane getButtonPane() {
@@ -33,5 +29,4 @@ public class ControlPane extends VBox {
     public ProgressPane getProgressPane() {
         return progressPane;
     }
-
 }

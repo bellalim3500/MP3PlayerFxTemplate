@@ -16,7 +16,7 @@ public class PlayerViewController extends BaseController<PlayerView> {
         this.root = root;
         this.player = player;
 
-        controlPaneController = new ControlPaneController(root.getControlPane(), player);
+       
         initialize();
 
     }

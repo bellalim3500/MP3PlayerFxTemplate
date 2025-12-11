@@ -3,7 +3,6 @@ package de.hsrm.mi.enia.mp3player.presentation.uiComponents;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
 public class ButtonPane extends HBox {
 
@@ -14,26 +13,23 @@ public class ButtonPane extends HBox {
     private VolumePane volumePane;
 
     public ButtonPane() {
-        this.setSpacing(15);
-        this.setAlignment(Pos.CENTER);
+        super(15);
+        setAlignment(Pos.CENTER); // gesamte Gruppe zentriert
 
         shuffleButton = new Button("🔀");
         previousButton = new Button("⏮");
         playPauseButton = new Button("▶"); // Start immer Play
         skipButton = new Button("⏭");
+
         volumePane = new VolumePane();
 
-        HBox.setHgrow(volumePane,Priority.ALWAYS);
-volumePane.setMaxWidth(Double.MAX_VALUE);
-        this.getChildren().addAll(
-
+        getChildren().addAll(
                 previousButton,
                 playPauseButton,
                 skipButton,
                 shuffleButton,
-                volumePane);
-
-
+                volumePane
+        );
     }
 
     public Button getPreviousButton() {
@@ -52,7 +48,7 @@ volumePane.setMaxWidth(Double.MAX_VALUE);
         return shuffleButton;
     }
 
-    public VolumePane getVolumePane(){
+    public VolumePane getVolumePane() {
         return volumePane;
     }
 }

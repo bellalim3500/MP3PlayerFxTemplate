@@ -14,6 +14,7 @@ public class PlaylistView extends BorderPane {
 
 
     public PlaylistView() {
+        getStyleClass().add("playlist-view");
         titleLabel = new Label();
 
         playListView = new  ListView<>();
@@ -23,7 +24,6 @@ public class PlaylistView extends BorderPane {
         this.setCenter(playListView);
 
       
-        this.setBottom(controlPane);
     }
 
 

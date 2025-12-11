@@ -1,8 +1,12 @@
 package de.hsrm.mi.enia.mp3player.presentation;
 
+import java.util.ResourceBundle.Control;
+
 import de.hsrm.mi.enia.mp3player.business.MP3Player;
 import de.hsrm.mi.enia.mp3player.business.Playlist;
 import de.hsrm.mi.enia.mp3player.business.PlaylistManager;
+import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPane;
+import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPaneController;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.NavToolbar;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.NavToolbarController;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlayerView;
@@ -10,9 +14,10 @@ import de.hsrm.mi.enia.mp3player.presentation.views.PlayerViewController;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistView;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistViewController;
 import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +31,7 @@ public class MP3PlayerGUI extends Application {
 	private PlaylistView playlistView;
 	private PlaylistManager playlistManager;
 	private MP3Player player;
+	private ControlPane controlPane;
 
 	@Override
 	public void init() {
@@ -43,23 +49,30 @@ public class MP3PlayerGUI extends Application {
 
 		playerView = new PlayerView();
 		playlistView = new PlaylistView();
+		controlPane = new ControlPane();
 
+		ControlPaneController controlPaneController = new ControlPaneController(controlPane, player);
 		PlayerViewController playerViewController = new PlayerViewController(playerView, player);
 		PlaylistViewController playlistViewController = new PlaylistViewController(playlistView, player,
 				playlistManager);
 		NavToolbar navToolbar = new NavToolbar();
 
 		BorderPane root = new BorderPane();
+
 		root.setCenter(playlistView);
-		root.setBottom(navToolbar);
+		root.setTop(navToolbar);
+		root.setBottom(controlPane);
 		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView, playlistView,
 				root);
-
+		
 		this.primaryStage = primaryStage;
-		Scene scene = new Scene(root, 500, 400);
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 		primaryStage.setScene(scene);
+		primaryStage.setMinWidth(550);
+		primaryStage.setMinHeight(550);
 
+		
 		primaryStage.setTitle("Player");
 		primaryStage.show();
 

@@ -9,11 +9,11 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
     private VolumePaneController volumePaneController;
 
     public ButtonPaneController(ButtonPane view, MP3Player player) {
-        
+
         this.root = view;
         this.player = player;
         volumePaneController = new VolumePaneController(root.getVolumePane());
-        volumePaneController.setPlayer(player); 
+        volumePaneController.setPlayer(player);
         volumePaneController.initialize();
 
         initialize();
@@ -29,14 +29,7 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
                 root.getPlayPauseButton().setText("⏸");
                 return;
             }
-            if (!player.getAudioPlayer().isPlaying()
-                    && player.getAudioPlayer().position() >= player.getAudioPlayer().length()) {
-
-                player.skip();
-                root.getPlayPauseButton().setText("⏸");
-                return;
-            }
-
+            
             if (player.isPlaying()) {
                 player.pause();
                 root.getPlayPauseButton().setText("▶");
@@ -56,7 +49,7 @@ public class ButtonPaneController extends BaseController<ButtonPane> {
         root.getShuffleButton().setOnAction(e -> {
             player.shuffle();
             if (player.isShuffle()) {
-                root.getShuffleButton().setStyle("-fx-background-color: #8d6e63;");
+                root.getShuffleButton().setStyle("-fx-background-color: #42A5F5;");
             } else {
                 root.getShuffleButton().setStyle("");
             }

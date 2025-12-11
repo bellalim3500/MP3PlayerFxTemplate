@@ -17,10 +17,11 @@ public class MP3Player {
     private Playlist aktPlaylist;
     private boolean shuffle;
     private Thread progressThread;
-    private boolean running;
+    
+    private boolean userPaused = false;
 
     private final ObjectProperty<Track> currentTrackProperty = new SimpleObjectProperty<>();
-    private final DoubleProperty volumeProperty = new SimpleDoubleProperty(0);
+    private final DoubleProperty volumeProperty = new SimpleDoubleProperty(50);
     private final DoubleProperty progressProperty = new SimpleDoubleProperty(0);
     private final StringProperty timeProperty = new SimpleStringProperty("00:00");
 
@@ -34,51 +35,65 @@ public class MP3Player {
     }
 
     private void startProgressThread() {
-        running = true;
+        
 
         progressThread = new Thread(() -> {
-            while (running) {
+            
                 try {
-                    if (audioPlayer != null && currentTrackProperty.get() != null) {
+                    while (!Thread.currentThread().isInterrupted()) {
+                        if (audioPlayer != null && currentTrackProperty.get() != null) {
 
-                        double pos = audioPlayer.position();
-                        double total = currentTrackProperty.get().getLength();
+                            double pos = audioPlayer.position();
+                            double total = audioPlayer.length();
 
-                        long currentMs = (long) pos;
-                        int minutes = (int) (currentMs / 1000 / 60);
-                        int seconds = (int) ((currentMs / 1000) % 60);
+                            long currentMs = (long) pos;
+                            int minutes = (int) (currentMs / 1000 / 60);
+                            int seconds = (int) ((currentMs / 1000) % 60);
 
-                        Platform.runLater(() -> {
-                            progressProperty.set(pos / total);
-                            timeProperty.set(String.format("%02d:%02d", minutes, seconds));
-                        });
+                            Platform.runLater(() -> {
 
-                        if (!audioPlayer.isPlaying() && audioPlayer.position() > 200) {
-                           Platform.runLater(() -> skip());
+                                progressProperty.set(pos / total);
+
+                                timeProperty.set(String.format("%02d:%02d", minutes, seconds));
+                            });
+
+                            if (!audioPlayer.isPlaying()
+                                    && !userPaused
+                                    && pos > 200
+                                    && total > 0) {
+
+                                Platform.runLater(() -> skip());
+
+                            }
+
                         }
 
+                        Thread.sleep(200);
                     }
 
-                    Thread.sleep(200);
-
                 } catch (InterruptedException e) {
-                    running = false;
+
+                    Thread.currentThread().interrupt();
                 }
             }
-        });
+        );
 
         progressThread.start();
     }
 
     private void stopProgressThread() {
-        running = false;
+  
         if (progressThread != null) {
             progressThread.interrupt();
+            progressThread = null;
 
         }
     }
 
     public void playFile(String fileName) {
+
+        userPaused = false;
+        stopProgressThread();
 
         if (audioPlayer != null) {
             audioPlayer.pause();
@@ -96,8 +111,6 @@ public class MP3Player {
             }
         }).start();
 
-        stopProgressThread();
-        ;
         startProgressThread();
 
         progressProperty.set(0);
@@ -106,10 +119,6 @@ public class MP3Player {
 
     public boolean isShuffle() {
         return shuffle;
-    }
-
-    public void update() {
-
     }
 
     public void play(Track track) {
@@ -133,7 +142,7 @@ public class MP3Player {
     }
 
     public boolean isPlaying() {
-        return audioPlayer.isPlaying();
+        return audioPlayer != null && audioPlayer.isPlaying();
     }
 
     public void playTrack(int trackIndex) {
@@ -149,14 +158,17 @@ public class MP3Player {
 
     }
 
-    public synchronized void skip() {
+    public void skip() {
         if (aktPlaylist == null || aktPlaylist.numberOfTracks() == 0) {
             System.err.print(" Invalid Playlist. Skip not possible");
             return;
         }
 
         if (shuffle) {
-            int next = (int) (Math.random() * aktPlaylist.numberOfTracks());
+            int next;
+            do {
+                next = (int) (Math.random() * aktPlaylist.numberOfTracks());
+            } while (next == currentTrack);
             playTrack(next);
             return;
         }
@@ -170,7 +182,7 @@ public class MP3Player {
         playTrack(nextIndex);
     }
 
-    public synchronized void previous() {
+    public void previous() {
         if (aktPlaylist == null || aktPlaylist.numberOfTracks() == 0) {
             System.err.print(" Invalid Playlist. Skip not possible");
             return;
@@ -185,6 +197,7 @@ public class MP3Player {
 
     public void resume() {
         if (audioPlayer != null && !audioPlayer.isPlaying()) {
+            userPaused = false;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -197,6 +210,7 @@ public class MP3Player {
 
     public void pause() {
         if (audioPlayer != null && audioPlayer.isPlaying()) {
+            userPaused = true;
             audioPlayer.pause();
         }
     }
@@ -238,9 +252,10 @@ public class MP3Player {
         return currentTrackProperty.get();
     }
 
-  private void setCurrentTrack(Track track) {
-    Platform.runLater(() -> currentTrackProperty.set(track));
-}
+    private void setCurrentTrack(Track track) {
+        Platform.runLater(() -> currentTrackProperty.set(track));
+    }
+
     public DoubleProperty getVolumeProperty() {
         return volumeProperty;
 

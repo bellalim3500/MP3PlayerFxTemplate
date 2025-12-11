@@ -5,23 +5,16 @@ import javafx.scene.layout.HBox;
 
 public class VolumePane extends HBox {
 
-   
     private Slider volumeSlider;
 
     public VolumePane() {
-      
-        volumeSlider = new Slider();
-        volumeSlider.setPrefWidth(150);
-        volumeSlider.setMaxWidth(250);
-        volumeSlider.setMinWidth(80);
+        volumeSlider = new Slider(0,100,50);
 
-        this.getChildren().addAll(
-                volumeSlider);
-  
+
+        getChildren().add(volumeSlider);
     }
 
-      public Slider getVolumeSlider() {
+    public Slider getVolumeSlider() {
         return volumeSlider;
     }
-
 }

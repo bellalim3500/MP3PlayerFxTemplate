@@ -4,61 +4,51 @@ import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.CoverViewPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.TextPane;
 import javafx.geometry.Pos;
+
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Priority;
+
 import javafx.scene.layout.VBox;
 
-
 public class PlayerView extends BorderPane {
-	
-	CoverViewPane cover;
-	TextPane songInfo;
-	ControlPane controlPane;
-	private VBox view;
-	
-	
 
-	public PlayerView() {
+    private CoverViewPane cover;
+    private TextPane songInfo;
+    private ControlPane controlPane;
+    private VBox centerBox;
 
-		view= new VBox(10);
-		view.setAlignment(Pos.CENTER);
-		
-		cover = new CoverViewPane();
-		cover.setMinHeight(200);
-		cover.setMaxHeight(Double.MAX_VALUE);
+    public PlayerView() {
+        getStyleClass().add("player-view");
 
-		controlPane = new ControlPane();
-		songInfo=new TextPane();
-		songInfo.setMaxWidth(Double.MAX_VALUE);
-		
-		view.getChildren().addAll(cover, songInfo);
-		VBox.setVgrow(cover,Priority.ALWAYS);
-		this.setCenter(view);
-		this.setBottom(controlPane);
-		
+        cover = new CoverViewPane();
+		cover.setMaxWidth(Double.MAX_VALUE);
+        
+        songInfo = new TextPane();
+        songInfo.setMaxWidth(Double.MAX_VALUE);
 
-		BorderPane.setAlignment(view, Pos.CENTER);
-		BorderPane.setAlignment(controlPane,Pos.CENTER);
-	
-	}
+        centerBox = new VBox(10);
+        centerBox.setAlignment(Pos.CENTER);
+        //centerBox.setMaxWidth(Double.MAX_VALUE);
+        centerBox.getChildren().addAll(cover, songInfo);
+        
+
+       
+
+        setCenter(centerBox);
 
 
-	public CoverViewPane getCoverViewPane() {
-		return cover;
-	}
+        BorderPane.setAlignment(centerBox, Pos.CENTER);
+        
+    }
 
+    public CoverViewPane getCoverViewPane() {
+        return cover;
+    }
 
-	public ControlPane getControlPane() {
-		return controlPane;
-	}
+    public ControlPane getControlPane() {
+        return controlPane;
+    }
 
-
-	public TextPane getSongInfo() {
-		return songInfo;
-	}
-
-
-	
-	
-
+    public TextPane getSongInfo() {
+        return songInfo;
+    }
 }

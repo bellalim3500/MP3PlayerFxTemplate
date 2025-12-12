@@ -1,6 +1,5 @@
 package de.hsrm.mi.enia.mp3player.presentation.views;
 
-import de.hsrm.mi.enia.mp3player.presentation.uiComponents.ControlPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.CoverViewPane;
 import de.hsrm.mi.enia.mp3player.presentation.uiComponents.TextPane;
 import javafx.geometry.Pos;
@@ -13,7 +12,7 @@ public class PlayerView extends BorderPane {
 
     private CoverViewPane cover;
     private TextPane songInfo;
-    private ControlPane controlPane;
+
     private VBox centerBox;
 
     public PlayerView() {
@@ -27,11 +26,8 @@ public class PlayerView extends BorderPane {
 
         centerBox = new VBox(10);
         centerBox.setAlignment(Pos.CENTER);
-        //centerBox.setMaxWidth(Double.MAX_VALUE);
         centerBox.getChildren().addAll(cover, songInfo);
         
-
-       
 
         setCenter(centerBox);
 
@@ -42,10 +38,6 @@ public class PlayerView extends BorderPane {
 
     public CoverViewPane getCoverViewPane() {
         return cover;
-    }
-
-    public ControlPane getControlPane() {
-        return controlPane;
     }
 
     public TextPane getSongInfo() {

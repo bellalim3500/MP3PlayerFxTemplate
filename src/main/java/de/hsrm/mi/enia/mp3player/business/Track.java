@@ -12,7 +12,6 @@ public class Track {
     private String albumTitle;
     private String interpret;
     private String soundFile;
-    private byte[] albumImage;
     private Image coverImage;
 
     public Track(String albumTitle, String interpret, long length, String soundFile, String title, byte[] albumImage) {
@@ -21,7 +20,6 @@ public class Track {
         this.length = length;
         this.soundFile = soundFile;
         this.title = title;
-        this.albumImage = albumImage;
         if (albumImage != null && albumImage.length > 0) {
             this.coverImage = new Image(new ByteArrayInputStream(albumImage));
         }

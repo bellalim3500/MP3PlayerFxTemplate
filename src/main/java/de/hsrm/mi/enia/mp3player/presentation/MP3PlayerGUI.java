@@ -1,7 +1,5 @@
 package de.hsrm.mi.enia.mp3player.presentation;
 
-import java.util.ResourceBundle.Control;
-
 import de.hsrm.mi.enia.mp3player.business.MP3Player;
 import de.hsrm.mi.enia.mp3player.business.Playlist;
 import de.hsrm.mi.enia.mp3player.business.PlaylistManager;
@@ -14,10 +12,8 @@ import de.hsrm.mi.enia.mp3player.presentation.views.PlayerViewController;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistView;
 import de.hsrm.mi.enia.mp3player.presentation.views.PlaylistViewController;
 import javafx.application.Application;
-
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-
 import javafx.stage.Stage;
 
 /**
@@ -64,7 +60,7 @@ public class MP3PlayerGUI extends Application {
 		root.setBottom(controlPane);
 		NavToolbarController navToolbarController = new NavToolbarController(navToolbar, playerView, playlistView,
 				root);
-		
+
 		this.primaryStage = primaryStage;
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
@@ -72,7 +68,6 @@ public class MP3PlayerGUI extends Application {
 		primaryStage.setMinWidth(550);
 		primaryStage.setMinHeight(550);
 
-		
 		primaryStage.setTitle("Player");
 		primaryStage.show();
 
